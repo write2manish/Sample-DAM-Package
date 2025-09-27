@@ -2,6 +2,7 @@ import { LightningElement, track, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import deleteInstance from '@salesforce/apex/DamProviderInstanceAdmin.deleteInstance';
+import deleteInstanceWithMessage from '@salesforce/apex/DamProviderInstanceAdmin.deleteInstanceWithMessage';
 import listCreatedInstances from '@salesforce/apex/DamProviderInstanceAdmin.listCreatedInstances';
 import listProviderInstances from '@salesforce/apex/DamProviderInstanceAdmin.listProviderInstances';
 
@@ -72,7 +73,19 @@ export default class DamProviderInstanceDelete extends LightningElement {
 		}
 		this.submitting = true;
 		try {
-			await deleteInstance({ providerInstanceId: this.providerInstanceId });
+			// Prefer server-side message-returning API when available
+			let msg;
+			try {
+				msg = await deleteInstanceWithMessage({ providerInstanceId: this.providerInstanceId });
+			} catch (ignored) {
+				msg = undefined;
+			}
+			if (msg && msg !== 'OK') {
+				throw { body: { message: msg } };
+			}
+			if (!msg) {
+				await deleteInstance({ providerInstanceId: this.providerInstanceId });
+			}
 			this.dispatchEvent(new ShowToastEvent({ title: 'Deleted', message: 'Provider instance deleted successfully', variant: 'success' }));
 			this.providerInstanceId = '';
 			this.confirmId = '';
@@ -84,7 +97,11 @@ export default class DamProviderInstanceDelete extends LightningElement {
 			await new Promise(r => setTimeout(r, 500));
 			await this.reloadOptions();
 		} catch (e) {
-			this.dispatchEvent(new ShowToastEvent({ title: 'Error', message: e?.body?.message || e.message, variant: 'error' }));
+			const pageError = e?.body?.pageErrors && e.body.pageErrors.length ? e.body.pageErrors[0]?.message : '';
+			const platformMsg = e?.body?.message || pageError || e?.message || 'Unknown error';
+			const guidance = 'Delete failed. One possible reason is that the provider instance still has content/media assets that must be deleted first. '
+				+ 'Please remove related assets, then retry. Refer to the Managed Content delete API documentation for more details. '; 
+			this.dispatchEvent(new ShowToastEvent({ title: 'Error', message: guidance + 'Details: ' + platformMsg, variant: 'error' }));
 		} finally {
 			this.submitting = false;
 		}

@@ -1,4 +1,5 @@
 public with sharing class DamProviderInstanceAction {
+	@TestVisible private static Boolean testBypassConnectApi = false;
 	public class Request {
 		@InvocableVariable(required=true) public String providerLabel;
 		@InvocableVariable(required=true) public String instanceName;
@@ -19,6 +20,23 @@ public with sharing class DamProviderInstanceAction {
 		for (Request r : requests) {
 			Response res = new Response();
 			try {
+				if (testBypassConnectApi) {
+					// Simulate a successful create in tests without calling ConnectApi
+					res.status = 'Succeeded';
+					res.createdInstanceId = 'prov-test-001';
+					if (r.requestRecordId != null) {
+						DAM_Provider_Instance_Request__c upd = new DAM_Provider_Instance_Request__c(
+							Id = r.requestRecordId,
+							Status__c = 'Succeeded',
+							Created_Instance_Id__c = res.createdInstanceId,
+							Error_Message__c = null
+						);
+						update upd;
+					}
+					results.add(res);
+					continue;
+				}
+
 				String providerLightningComponentId = findProviderLightningComponentId(r.providerLabel);
 				if (String.isBlank(providerLightningComponentId)) {
 					res.status = 'Failed';
