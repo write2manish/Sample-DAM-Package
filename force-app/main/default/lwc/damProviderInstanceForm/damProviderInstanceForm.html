@@ -1,0 +1,13 @@
+<template>
+	<lightning-card title="Create Provider Instance">
+		<div class="slds-p-around_medium">
+			<lightning-input label="Provider Label" field-level-help="Internal provider type. Must exactly match the DgtAssetMgmtProvider label/masterLabel (e.g., Unsplash). Not shown to end users." value={providerLabel} onchange={handleChange} data-field="Provider_Label__c" required></lightning-input>
+			<lightning-input label="Instance Name" field-level-help="End-user facing display name for this provider instance (shown in UI). Choose a clear, human-friendly name; spaces allowed." value={instanceName} onchange={handleChange} data-field="Instance_Name__c" required></lightning-input>
+			<lightning-input label="Instance Key" field-level-help="Internal key used by the integration to locate configuration for this instance. Must be unique." value={instanceKey} onchange={handleChange} data-field="Instance_Key__c" required></lightning-input>
+			<lightning-input type="checkbox" label="Is Default" field-level-help="If selected, this instance will be used when no other instance is specified." checked={isDefault} onchange={handleCheckbox}></lightning-input>
+			<div class="slds-m-top_medium">
+				<lightning-button variant="brand" label="Create" onclick={handleSubmit} disabled={submitting}></lightning-button>
+			</div>
+		</div>
+	</lightning-card>
+</template>

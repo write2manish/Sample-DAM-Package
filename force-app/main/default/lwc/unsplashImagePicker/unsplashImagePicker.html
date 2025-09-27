@@ -1,0 +1,100 @@
+<template>
+    <div class="slds-card">
+        <!-- Header -->
+        <div class="slds-p-around_medium slds-border_bottom">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-combobox
+                        label="Collections"
+                        value={selectedCollection}
+                        options={collections}
+                        onchange={handleCollectionChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col">
+                    <lightning-input
+                        type="search"
+                        label="Search for assets"
+                        value={searchTerm}
+                        onchange={handleSearch}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-col_bump-left">
+                    <lightning-button-icon
+                        icon-name="utility:logout"
+                        alternative-text="Log out"
+                        title="Log out"
+                        class="slds-m-top_medium">
+                    </lightning-button-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Count -->
+        <div class="slds-p-around_medium slds-border_bottom">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <p>{assets.length} assets</p>
+                </div>
+                <div class="slds-col slds-text-align_right">
+                    <lightning-button-icon
+                        icon-name="utility:sort"
+                        alternative-text="Sort"
+                        title="Sort"
+                        class="slds-m-right_x-small">
+                    </lightning-button-icon>
+                    <lightning-button-icon
+                        icon-name="utility:table"
+                        alternative-text="View as table"
+                        title="View as table">
+                    </lightning-button-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Grid -->
+        <div class="slds-p-around_medium">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <template for:each={assets} for:item="asset">
+                    <div key={asset.id} class="slds-col slds-size_1-of-3 slds-p-around_x-small">
+                        <div class="asset-card" onclick={handleAssetClick} data-id={asset.id}>
+                            <div class="slds-box slds-box_border">
+                                <div class="image-container">
+                                    <template if:true={isImageMediaType}>
+                                        <img src={asset.url} alt={asset.title} class="asset-image"/>
+                                    </template>
+                                    <template if:true={isVideoMediaType}>
+                                        <iframe 
+                                            src={asset.url} 
+                                            title={asset.title}
+                                            class="asset-video"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                        </iframe>
+                                    </template>
+                                    <template if:true={isAudioMediaType}>
+                                        <div class="audio-container">
+                                            <div class="audio-icon">
+                                                <lightning-icon 
+                                                    icon-name="utility:volume_high" 
+                                                    size="large" 
+                                                    class="audio-icon-svg">
+                                                </lightning-icon>
+                                                <p class="audio-title">{asset.title}</p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <span class="file-type">{asset.fileType}</span>
+                                </div>
+                                <p class="slds-p-around_x-small slds-text-heading_x-small">
+                                    {asset.title}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

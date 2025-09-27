@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+	<label>DAM Provider Admin</label>
+	<uiType>Lightning</uiType>
+	<navType>Standard</navType>
+	<formFactors>Large</formFactors>
+	<formFactors>Small</formFactors>
+	<tabs>DAM_Provider_Instance_Form</tabs>
+	<tabs>DAM_Provider_Instance_Request__c</tabs>
+	<tabs>DAM_Provider_Instance_Delete</tabs>
+</CustomApplication>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+	<fullName>DAM_Provider_Instance_Form</fullName>
+	<label>DAM Provider Instance Form</label>
+	<motif>Custom60: People</motif>
+	<lwcComponent>damProviderInstanceForm</lwcComponent>
+</CustomTab>

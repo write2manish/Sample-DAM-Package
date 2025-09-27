@@ -1,0 +1,2 @@
+# Ignore LWC Jest tests
+**/__tests__/**

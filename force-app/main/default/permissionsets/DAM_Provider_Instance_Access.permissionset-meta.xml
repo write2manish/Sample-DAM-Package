@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+	<hasActivationRequired>false</hasActivationRequired>
+	<label>DAM Provider Instance Access</label>
+	<userPermissions>
+		<enabled>true</enabled>
+		<name>ApiEnabled</name>
+	</userPermissions>
+	<objectPermissions>
+		<allowCreate>true</allowCreate>
+		<allowDelete>false</allowDelete>
+		<allowEdit>true</allowEdit>
+		<allowRead>true</allowRead>
+		<modifyAllRecords>false</modifyAllRecords>
+		<object>DAM_Provider_Instance_Request__c</object>
+		<viewAllRecords>false</viewAllRecords>
+	</objectPermissions>
+	<!-- Remove FLS entries for required fields to avoid deployment error -->
+	<fieldPermissions>
+		<editable>true</editable>
+		<field>DAM_Provider_Instance_Request__c.Is_Default__c</field>
+		<readable>true</readable>
+	</fieldPermissions>
+	<fieldPermissions>
+		<editable>true</editable>
+		<field>DAM_Provider_Instance_Request__c.Status__c</field>
+		<readable>true</readable>
+	</fieldPermissions>
+	<fieldPermissions>
+		<editable>false</editable>
+		<field>DAM_Provider_Instance_Request__c.Created_Instance_Id__c</field>
+		<readable>true</readable>
+	</fieldPermissions>
+	<fieldPermissions>
+		<editable>true</editable>
+		<field>DAM_Provider_Instance_Request__c.Error_Message__c</field>
+		<readable>true</readable>
+	</fieldPermissions>
+	<tabSettings>
+		<tab>DAM_Provider_Instance_Request__c</tab>
+		<visibility>Visible</visibility>
+	</tabSettings>
+	<tabSettings>
+		<tab>DAM_Provider_Instance_Form</tab>
+		<visibility>Visible</visibility>
+	</tabSettings>
+	<tabSettings>
+		<tab>DAM_Provider_Instance_Delete</tab>
+		<visibility>Visible</visibility>
+	</tabSettings>
+	<classAccesses>
+		<apexClass>DamProviderInstanceAdmin</apexClass>
+		<enabled>true</enabled>
+	</classAccesses>
+</PermissionSet>
