@@ -23,6 +23,50 @@ Important: This is a sample application for demonstration and learning purposes 
 - Salesforce CLI installed (`sf`)
 - Authorized Salesforce org (any alias of your choice)
 
+## Getting Started
+
+### Setting up your development environment
+
+#### 1. Install Salesforce CLI
+- **Download**: [Salesforce CLI Official Download Page](https://developer.salesforce.com/tools/sfdxcli)
+- **Documentation**: [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
+- **Installation methods**: 
+  - [Install via npm](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm)
+  - [Install via standalone installer](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm)
+
+#### 2. Install VS Code and Salesforce Extension Pack
+- **VS Code**: [Download Visual Studio Code](https://code.visualstudio.com/)
+- **Salesforce Extension Pack**: [Install from VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-pack)
+- **Documentation**: [VS Code for Salesforce Development](https://developer.salesforce.com/tools/vscode/en/getting-started/install)
+
+#### 3. Clone and setup this repository
+```bash
+# Clone the repository
+git clone https://github.com/write2manish/Sample-DAM-Package.git
+cd Sample-DAM-Package
+
+# Authenticate with your Salesforce org
+sf org login web -a <your-org-alias>
+
+# Verify connection
+sf org display -o <your-org-alias>
+```
+
+#### 4. Deploy to your target org
+```bash
+# Deploy all metadata
+sf project deploy start -o <your-org-alias>
+
+# Assign required permissions
+sf org assign permset --name DAM_Provider_Instance_Access -o <your-org-alias>
+```
+
+### Additional Resources
+- **Salesforce CLI Commands**: [Complete CLI Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+- **VS Code Salesforce Development**: [VS Code Salesforce Documentation](https://developer.salesforce.com/tools/vscode/en/)
+- **Lightning Web Components**: [LWC Developer Guide](https://developer.salesforce.com/docs/component-library/documentation/en/lwc)
+- **Apex Development**: [Apex Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/)
+
 ## Deploy
 ```bash
 sf project deploy start -o <your-org-alias>
