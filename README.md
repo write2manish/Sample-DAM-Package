@@ -99,8 +99,8 @@ sf org assign permset --name DAM_Provider_Instance_Access -o <your-org-alias>
   - In DAM Provider Admin, open `DAM Provider Instance Form` or `DAM_Provider_Instance_Request__c` tab to confirm your request appears with expected status and fields
 - Delete flow (optional)
   - Open `DAM Provider Instance Delete` tab → enter a Provider Instance Id → Delete → confirm success or handled error
-- Unsplash picker (optional UI)
-  - Setup → Lightning App Builder → create a Lightning App Page → drag `unsplashImagePicker` → Save/Activate → open page and confirm assets load
+- Navigate to Salesforce CMS Workspace
+  - Open the Workspace -> Click Add Content -> Select News -> Select Add Image-> Click External Tab-> Select the image from the UI on the right -> Click Save
 - Troubleshooting
   - If assets do not load, verify CSP Trusted Sites (`unsplash`, `unsplash_audio`, `unsplash_video`) and that your network allows those endpoints
   - ConnectApi operations depend on org configuration; errors are expected in some environments and should surface in `Error_Message__c`
