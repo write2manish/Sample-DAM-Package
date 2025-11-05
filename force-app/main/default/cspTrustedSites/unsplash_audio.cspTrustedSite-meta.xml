@@ -3,7 +3,7 @@
     <canAccessCamera>false</canAccessCamera>
     <canAccessMicrophone>false</canAccessMicrophone>
     <context>All</context>
-    <endpointUrl>https://dare.wisc.edu</endpointUrl>
+    <endpointUrl>https://traffic.libsyn.com</endpointUrl>
     <isActive>true</isActive>
     <isApplicableToConnectSrc>false</isApplicableToConnectSrc>
     <isApplicableToFontSrc>false</isApplicableToFontSrc>
