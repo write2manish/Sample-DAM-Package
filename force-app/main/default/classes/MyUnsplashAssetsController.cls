@@ -16,7 +16,7 @@ public with sharing class MyUnsplashAssetsController {
             'AUDIO'=> new List<Map<String, String>>{ 
                 new Map<String, String>{'id' => 'aud-1',
                 'title' => 'Audio 1 : from instanceKey= ' +instanceKey,
-                'url' => 'https://dare.wisc.edu/wp-content/uploads/sites/1051/2017/08/CA138clip.mp3'}
+                'url' => 'https://traffic.libsyn.com/buttonclickadmin2/Building_Salesforce_Projects_to_Land_Your_Next_Role.mp3'}
                 
              },
             'IMAGE'=> new List<Map<String, String>>{
